@@ -1,7 +1,11 @@
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
-  background(220);
+  image(img, 0, 0, width, height);
+}
+
+function preload() {
+  img = loadImage('images/le house.jpeg');
 }
