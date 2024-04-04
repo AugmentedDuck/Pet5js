@@ -1,8 +1,9 @@
 class Pet {
-    constructor(name, species){
+    constructor(name, species, petImage){
         this.name = name;
         this.species = species;
         this.affinity = 0;
+        this.petImage = petImage;
     }
 
     drawAnimal(posX, posY){

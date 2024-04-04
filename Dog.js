@@ -1,10 +1,10 @@
 class Dog extends Pet {
-    constructor(name){
-        super(name, "dog")
+    constructor(name, dogImage){
+        super(name, "dog", dogImage)
     }
 
-    drawAnimal(posX, posY){
-        
+    drawAnimal(posX, posY, size){
+        image(this.petImage, posX, posY, size, size)
     }
 
     pet() {
@@ -20,6 +20,6 @@ class Dog extends Pet {
     }
 
     lickOwner() {
-        
+
     }
 }
