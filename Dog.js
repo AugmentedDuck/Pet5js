@@ -1,5 +1,25 @@
 class Dog extends Pet {
-    constructor(){
-        super()
+    constructor(name){
+        super(name, "dog")
+    }
+
+    drawAnimal(posX, posY){
+        
+    }
+
+    pet() {
+        
+    }
+
+    walk() {
+
+    }
+
+    playFetch() {
+        
+    }
+
+    lickOwner() {
+        
     }
 }

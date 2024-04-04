@@ -1,5 +1,25 @@
 class Cat extends Pet {
-    constructor(){
+    constructor(name){
+        super(name, "cat")
+    }
 
+    drawAnimal(posX, posY){
+        
+    }
+
+    pet() {
+        
+    }
+
+    sleep() {
+
+    }
+
+    LayInBox() {
+        
+    }
+
+    hairball() {
+        
     }
 }
