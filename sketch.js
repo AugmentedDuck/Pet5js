@@ -1,11 +1,19 @@
+let backgroundImg;
+let dog;
+let dogImg
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  dog = new Dog("Emil", dogImg)
 }
 
 function draw() {
-  image(img, 0, 0, width, height);
+  image(backgroundImg, 0, 0, width, height);
+  dog.drawAnimal(width / 2, height * 2/3, 200)
 }
 
 function preload() {
-  img = loadImage('images/le house.jpeg');
+  backgroundImg = loadImage('images/le house.jpeg');
+  dogImg = loadImage('images/le dog.png')
 }
