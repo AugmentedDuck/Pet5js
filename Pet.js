@@ -1,5 +1,5 @@
 class Pet {
-    constructor(name, species, petImage){
+    constructor(name, species, petImage, id){
         this.name = name;
         this.species = species;
         this.affinity = 0;
@@ -7,7 +7,8 @@ class Pet {
         this.posX = 0;
         this.posY = 0;
         this.size = 0;
-        this.lastAte = Date.now();
+        this.id = id;
+        this.lastAte = (window.localStorage.getItem(`${this.id}-eat`) === undefined) ? 0 : window.localStorage.getItem(`${this.id}-eat`);
     }
 
     drawAnimal(posX, posY, size){
@@ -18,7 +19,10 @@ class Pet {
     }
 
     eat(){
+        console.log(this.lastAte)
         this.lastAte = Date.now()
+        window.localStorage.setItem(`${this.id}-eat`, this.lastAte)
+        console.log(this.lastAte)
     }
 
     updateAffinity(amount) {
