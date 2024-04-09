@@ -28,11 +28,9 @@ class Pet {
     wasPetClicked() {
         if(this.posX < mouseX && this.posX + this.size > mouseX) { //Is inside of X bounds
             if (this.posY < mouseY && this.posY + this.size > mouseY) { //Is inside of Y bounds
-                console.log("Clicked")
                 return true
             }
         }
-        console.log("Not Clicked")
         return false
     }
 }
