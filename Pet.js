@@ -7,7 +7,7 @@ class Pet {
         this.posX = 0;
         this.posY = 0;
         this.size = 0;
-        this.lastAte = 0;
+        this.lastAte = Date.now();
     }
 
     drawAnimal(posX, posY, size){
@@ -18,7 +18,7 @@ class Pet {
     }
 
     eat(){
-
+        this.lastAte = Date.now()
     }
 
     updateAffinity(amount) {
