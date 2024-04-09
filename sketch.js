@@ -1,3 +1,5 @@
+
+
 let backgroundImg;
 let dog;
 let dogImg;
@@ -8,8 +10,8 @@ let catX;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  dog = new Dog("Emil", dogImg)
-  cat = new Cat("casper", catImg)
+  dog = new Dog("Emil", dogImg, "a465ce04-d64c-4d35-93f3-2251e5f9fcdc")
+  cat = new Cat("casper", catImg, "c46360f6-0c0b-4de3-870b-ea98a720a676")
   dogX = width / 2
   catX = width / 3
 }
@@ -29,6 +31,7 @@ function preload() {
 function mousePressed() {
   if(dog.wasPetClicked()) {
     dog.pet()
+    dog.eat()
   }
   
   if(cat.wasPetClicked()) {
@@ -43,7 +46,7 @@ function walkAround() {
   //Check if sides are hit
   if (dogX < 0) dogX = 0;
   if (dogX > width - dog.size) dogX = width - dog.size
-  
+
   dog.drawAnimal(dogX, height * 2/3, min(width,height)/3);
 
   //CAT

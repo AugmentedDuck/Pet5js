@@ -1,6 +1,6 @@
 class Cat extends Pet {
-    constructor(name, catImage){
-        super(name, "cat", catImage)
+    constructor(name, catImage, id){
+        super(name, "cat", catImage, id)
     }
 
     pet() {
