@@ -3,12 +3,8 @@ class Dog extends Pet {
         super(name, "dog", dogImage)
     }
 
-    drawAnimal(posX, posY, size){
-        image(this.petImage, posX, posY, size, size)
-    }
-
     pet() {
-        
+        this.updateAffinity(1);
     }
 
     walk() {

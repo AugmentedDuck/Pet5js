@@ -3,12 +3,8 @@ class Cat extends Pet {
         super(name, "cat", catImage)
     }
 
-    drawAnimal(posX, posY, size){
-        image(this.petImage, posX, posY, size, size)
-    }
-
     pet() {
-        
+        this.updateAffinity(random([-1,0,1]))
     }
 
     sleep() {
