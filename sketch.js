@@ -6,6 +6,7 @@ let catImg;
 let dogX;
 let catX;
 let time = 0;
+let foodImg;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -17,6 +18,7 @@ function setup() {
 
 function draw() {
   image(backgroundImg, 0, 0, width, height);
+  image(foodImg, width * 8.75 / 10, height / 10, min(width,height)/5, min(width,height)/5)
   walkAround()
   text(`DOG AFFINITY: ${dog.affinity}\nCAT AFFINITY: ${cat.affinity}`,width/20, height/20);
 
@@ -31,6 +33,7 @@ function preload() {
   backgroundImg = loadImage('images/le house.jpeg');
   dogImg = loadImage('images/le dog.png')
   catImg = loadImage('images/le cat.png')
+  foodImg = loadImage('images/le food.png')
 }
 
 function mousePressed() {
