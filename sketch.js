@@ -44,6 +44,12 @@ function mousePressed() {
   if(cat.wasPetClicked()) {
     cat.pet()
   }
+
+  if(wasFoodPressed()){
+    dog.eat()
+    cat.eat()
+  }
+  console.log(wasFoodPressed())
 }
 
 function walkAround() {
@@ -67,4 +73,13 @@ function walkAround() {
   
     dog.drawAnimal(dogX, height * 2/3, min(width,height)/3);
   }
+}
+
+function wasFoodPressed(){
+  if(width * 8.75 / 10 < mouseX && width * 8.75 / 10 + min(width,height)/5 > mouseX) { //Is inside of X bounds
+    if (height / 10 < mouseY && height / 10 + min(width,height)/5 > mouseY) { //Is inside of Y bounds
+        return true
+    }
+  }
+  return false
 }
