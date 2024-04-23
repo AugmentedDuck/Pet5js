@@ -67,7 +67,6 @@ class Pet {
 
     walkAround() {
         if (!this.isDead) {
-            //DOG
             if(round(this.targetX) == round(this.posX) || !this.targetX) {
               this.targetX = random(0,width - this.size)
             }
