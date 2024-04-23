@@ -19,8 +19,11 @@ function setup() {
 function draw() {
   image(backgroundImg, 0, 0, width, height);
   image(foodImg, width * 8.75 / 10, height / 10, min(width,height)/5, min(width,height)/5)
-  walkAround()
+
   text(`DOG AFFINITY: ${dog.affinity}\nCAT AFFINITY: ${cat.affinity}`,width/20, height/20);
+
+  dog.walkAround()
+  cat.walkAround()
 
   time++;
   if (time % 100 == 0) {
@@ -43,28 +46,5 @@ function mousePressed() {
   
   if(cat.wasPetClicked()) {
     cat.pet()
-  }
-}
-
-function walkAround() {
-  if (!cat.isDead) {
-    let deltaX = random(-5,5)
-    catX += deltaX
-    //Check if sides are hit
-    if (catX < 0) catX = 0;
-    if (catX > width - cat.size) catX = width - cat.size
-
-    cat.drawAnimal(catX, height * 2/3, min(width,height)/4);
-  }
-
-  if (!dog.isDead) {
-    //DOG
-    deltaX = random(-10,10)
-    dogX += deltaX;
-    //Check if sides are hit
-    if (dogX < 0) dogX = 0;
-    if (dogX > width - dog.size) dogX = width - dog.size
-  
-    dog.drawAnimal(dogX, height * 2/3, min(width,height)/3);
   }
 }

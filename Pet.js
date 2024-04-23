@@ -10,6 +10,7 @@ class Pet {
         this.id = id;
         this.lastAte = (window.localStorage.getItem(`${this.id}-eat`) === undefined) ? 0 : window.localStorage.getItem(`${this.id}-eat`);
         this.isDead = false;
+        this.targetX;
     }
 
     drawAnimal(posX, posY, size){
@@ -50,5 +51,17 @@ class Pet {
             }
         }
         return false
+    }
+
+    walkAround() {
+        if (!this.isDead) {
+            //DOG
+            if(round(this.targetX) == round(this.posX) || !this.targetX) {
+              this.targetX = random(0,width - this.size)
+            }
+            this.posX = lerp(this.posX, this.targetX, 0.05)
+          
+            this.drawAnimal(this.posX, height * 2/3, min(width,height)/3);
+          }
     }
 }
