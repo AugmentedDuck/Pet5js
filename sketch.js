@@ -57,29 +57,6 @@ function mousePressed() {
   console.log(wasFoodPressed())
 }
 
-function walkAround() {
-  if (!cat.isDead) {
-    let deltaX = random(-5,5)
-    catX += deltaX
-    //Check if sides are hit
-    if (catX < 0) catX = 0;
-    if (catX > width - cat.size) catX = width - cat.size
-
-    cat.drawAnimal(catX, height * 2/3, min(width,height)/4);
-  }
-
-  if (!dog.isDead) {
-    //DOG
-    deltaX = random(-10,10)
-    dogX += deltaX;
-    //Check if sides are hit
-    if (dogX < 0) dogX = 0;
-    if (dogX > width - dog.size) dogX = width - dog.size
-  
-    dog.drawAnimal(dogX, height * 2/3, min(width,height)/3);
-  }
-}
-
 function wasFoodPressed(){
   if(width * 8.75 / 10 < mouseX && width * 8.75 / 10 + min(width,height)/5 > mouseX) { //Is inside of X bounds
     if (height / 10 < mouseY && height / 10 + min(width,height)/5 > mouseY) { //Is inside of Y bounds
