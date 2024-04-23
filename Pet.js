@@ -11,6 +11,7 @@ class Pet {
         this.lastAte = (window.localStorage.getItem(`${this.id}-eat`) === null) ? 0 : window.localStorage.getItem(`${this.id}-eat`);
         this.isDead = false;
         this.targetX;
+        this.foodAte = 0
     }
 
     drawAnimal(posX, posY, size){
@@ -21,14 +22,25 @@ class Pet {
     }
 
     eat(){
+        this.foodAte += 1
         let dateNow = Date.now()
-        if (this.lastAte - dateNow > 10*60*60*1000) {
-            if (24*60*60*1000 > this.lastAte - dateNow) {
-                this.updateAffinity(1)    
+        if (dateNow - this.lastAte > 1*60*1000) {
+            console.log("first if statement")
+            if (24*60*60*1000 > dateNow - this.lastAte) {
+                console.log("second if statement")
+                this.updateAffinity(1)   
             }
         }
         this.lastAte = dateNow
         window.localStorage.setItem(`${this.id}-eat`, this.lastAte)
+
+        if(this.foodAte > 10){
+        this.isDead = true
+        }
+
+        if(dateNow%1000 * 60 == 0){
+            this.foodAte = 0
+        }
     }
 
     updateAffinity(amount) {
