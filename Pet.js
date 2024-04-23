@@ -8,7 +8,7 @@ class Pet {
         this.posY = 0;
         this.size = 0;
         this.id = id;
-        this.lastAte = (window.localStorage.getItem(`${this.id}-eat`) === undefined) ? 0 : window.localStorage.getItem(`${this.id}-eat`);
+        this.lastAte = (window.localStorage.getItem(`${this.id}-eat`) === null) ? 0 : window.localStorage.getItem(`${this.id}-eat`);
         this.isDead = false;
         this.targetX;
     }
@@ -21,9 +21,9 @@ class Pet {
     }
 
     eat(){
-        let dateNow = Date.not()
-        if (this.lastAte - dateNow > 10*60*60) {
-            if (24*60*60 > this.lastAte - dateNow) {
+        let dateNow = Date.now()
+        if (this.lastAte - dateNow > 10*60*60*1000) {
+            if (24*60*60*1000 > this.lastAte - dateNow) {
                 this.updateAffinity(1)    
             }
         }
