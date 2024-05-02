@@ -8,11 +8,14 @@ let catX;
 let time = 0;
 let foodImg;
 let firstSave = (window.localStorage.getItem(`timeSaved`) === null) ? Date.now() : window.localStorage.getItem(`timeSaved`);
+let ballImg;
+let ball
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   dog = new Dog("Emil", dogImg, "a465ce04-d64c-4d35-93f3-2251e5f9fcdc")
   cat = new Cat("Casper", catImg, "c46360f6-0c0b-4de3-870b-ea98a720a676")
+  ball =new Ball(ballImg)
   dogX = width / 2
   catX = width / 3
   window.localStorage.setItem(`timeSaved`, firstSave)
@@ -26,6 +29,7 @@ function draw() {
 
   dog.walkAround()
   cat.walkAround()
+  ball.update()
 
   time++;
   if (time % 100 == 0) {
@@ -39,6 +43,7 @@ function preload() {
   dogImg = loadImage('images/le dog.png')
   catImg = loadImage('images/le cat.png')
   foodImg = loadImage('images/le food.png')
+  ballImg = loadImage('images/le ball.png')
 }
 
 function mousePressed() {
@@ -54,7 +59,11 @@ function mousePressed() {
     dog.eat()
     cat.eat()
   }
-  console.log(wasFoodPressed())
+
+  if(ball.wasBallPressed()){
+    ball.throwBall()
+  }
+  console.log(ball.wasBallPressed())
 }
 
 function wasFoodPressed(){
