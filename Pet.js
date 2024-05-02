@@ -48,7 +48,7 @@ class Pet {
     }
 
     isPetDead() {
-        if (this.lastAte - Date.now() > 5*24*60*60) {
+        if (Date.now() - this.lastAte > 5*24*60*60*1000) {
             this.isDead = true
             return true
         }
