@@ -8,7 +8,7 @@ class Pet {
         this.posY = 0;
         this.size = 0;
         this.id = id;
-        this.lastAte = (window.localStorage.getItem(`${this.id}-eat`) === null) ? 0 : window.localStorage.getItem(`${this.id}-eat`);
+        this.lastAte = (window.localStorage.getItem(`${this.id}-eat`) === null) ? Date.now() : window.localStorage.getItem(`${this.id}-eat`);
         this.isDead = false;
         this.targetX;
         this.foodAte = 0
@@ -35,10 +35,10 @@ class Pet {
         window.localStorage.setItem(`${this.id}-eat`, this.lastAte)
 
         if(this.foodAte > 10){
-        this.isDead = true
+            this.isDead = true
         }
 
-        if(dateNow%1000 * 60 == 0){
+        if(dateNow % 1000 * 60 == 0){
             this.foodAte = 0
         }
     }
