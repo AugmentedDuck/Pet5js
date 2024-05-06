@@ -1,7 +1,7 @@
 let backgroundImg;
-let dog;
+let dogs = [];
 let dogImg;
-let cat;
+let cats = [];
 let catImg;
 let dogX;
 let catX;
@@ -11,31 +11,54 @@ let firstSave = (window.localStorage.getItem(`timeSaved`) === null) ? Date.now()
 let ballImg;
 let ball
 
+
+
+let bestTime = (window.localStorage.getItem(`bestSaved`) === null) ? 0 : window.localStorage.getItem(`bestSaved`);
+let liveAnimals = [];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  dog = new Dog("Emil", dogImg, "a465ce04-d64c-4d35-93f3-2251e5f9fcdc")
-  cat = new Cat("Casper", catImg, "c46360f6-0c0b-4de3-870b-ea98a720a676")
+  loadAnimals()
+
   ball =new Ball(ballImg)
+
   dogX = width / 2
   catX = width / 3
   window.localStorage.setItem(`timeSaved`, firstSave)
+
+
+  let button = createButton('Buy Animal');
+  button.position(0, 100);
+
+  button.mousePressed(addAnimal);
 }
 
 function draw() {
   image(backgroundImg, 0, 0, width, height);
   image(foodImg, width * 8.75 / 10, height / 10, min(width,height)/5, min(width,height)/5)
 
-  text(`DOG AFFINITY: ${dog.affinity}\nCAT AFFINITY: ${cat.affinity}\nSeconds played: ${(Date.now() - firstSave)/1000}`,width/20, height/20);
+  text(`Seconds played: ${(Date.now() - firstSave)/1000}\nBest: ${bestTime}`,width/20, height/20);
 
-  dog.walkAround()
-  cat.walkAround()
-  ball.update()
+  for (const dog of dogs) {
+    dog.walkAround()
+    if (time % 100 == 0) {
+      if (dog.isPetDead()) {
+        removeAnimal("D" + dog.id)
+      }
+    }
+  }
+
+  for (const cat of cats) {
+    cat.walkAround()
+    if (time % 100 == 0) {
+      if (cat.isPetDead()) {
+        removeAnimal('C' + cat.id)
+      }
+    }
+  }
 
   time++;
-  if (time % 100 == 0) {
-    dog.isPetDead()
-    cat.isPetDead()
-  }
+  
 }
 
 function preload() {
@@ -47,17 +70,26 @@ function preload() {
 }
 
 function mousePressed() {
-  if(dog.wasPetClicked()) {
-    dog.pet()
+  for (const dog of dogs) {
+    if(dog.wasPetClicked()) {
+      dog.pet()
+    }  
   }
-  
-  if(cat.wasPetClicked()) {
-    cat.pet()
+
+  for (const cat of cats) {
+    if(cat.wasPetClicked()) {
+      cat.pet()
+    }  
   }
 
   if(wasFoodPressed()){
-    dog.eat()
-    cat.eat()
+    for (const dog of dogs) {
+      dog.eat()
+    }
+
+    for (const cat of cats) {
+      cat.eat()
+    }
   }
 
   if(ball.wasBallPressed()){
@@ -73,4 +105,59 @@ function wasFoodPressed(){
     }
   }
   return false
+}
+
+function saveAnimals() {
+  let savefile = ""
+  for (const animal of liveAnimals) {
+    savefile += animal + " "
+  }
+  savefile = savefile.trim()
+
+  window.localStorage.setItem("allIDs", savefile)
+}
+
+function removeAnimal(id) {
+  console.log(liveAnimals)
+
+  liveAnimals.splice(liveAnimals.indexOf(id), 1)
+  saveAnimals();
+  
+  console.log(liveAnimals)
+}
+
+function addAnimal() {
+  let newID = crypto.randomUUID().toString()
+  if (Math.round(Math.random()) == 1) {
+    liveAnimals.push("D" + newID)
+    dogs.push(new Dog('Name', dogImg, newID))
+    dogs[dogs.length - 1].eat()
+  } else {
+    liveAnimals.push("C" + newID)
+    cats.push(new Cat('Name2',catImg,newID))
+    cats[cats.length - 1].eat()
+  }
+
+  window.localStorage.setItem(`timeSaved`, Date.now())
+  bestTime = (Date.now() - firstSave > bestTime) ? (Date.now() - firstSave) / 1000 : bestTime;
+  window.localStorage.setItem(`bestSaved`, bestTime)
+  firstSave = Date.now();
+
+  saveAnimals();
+}
+
+function loadAnimals() {
+  let animalIDAll = (window.localStorage.getItem(`allIDs`) === null) ? "D" + crypto.randomUUID().toString() : window.localStorage.getItem(`allIDs`);
+
+  liveAnimals = animalIDAll.split(' ').filter(id => id !== '');
+  for (const animal of liveAnimals) {
+    let animalID = animal.slice(1, animal.length - 1)
+    if (animal.charAt(0) == "D") {
+      dogs.push(new Dog('Name', dogImg, animalID))
+    } else if (animal.charAt(0) == "C"){
+      cats.push(new Cat('Name2', catImg, animalID))
+    }
+  }
+
+  console.log(liveAnimals)
 }
