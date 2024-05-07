@@ -12,6 +12,7 @@ class Pet {
         this.isDead = false;
         this.targetX;
         this.foodAte = 0
+        this.canWalkAround = true
     }
 
     drawAnimal(posX, posY, size){
@@ -66,7 +67,7 @@ class Pet {
     }
 
     walkAround() {
-        if (!this.isDead) {
+        if (!this.isDead && this.canWalkAround) {
             if(round(this.targetX) == round(this.posX) || !this.targetX) {
               this.targetX = random(0,width - this.size)
             }
