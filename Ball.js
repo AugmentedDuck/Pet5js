@@ -14,14 +14,31 @@ class Ball {
     }
 
     update() {
+        this.posY += this.ySpeed; // Update y position
+
         // Gravity
         if (this.posY < height - this.size) { // Check if not on the ground
             this.ySpeed += 0.5; // Increment ySpeed to simulate gravity
+        } else if (this.ySpeed == 0.1) {
+            this.posY = height - this.size;
+            this.xSpeed *= 0.6
         } else {
-            this.ySpeed = 0; // Reset ySpeed when it hits the ground
+            this.ySpeed *= -0.9; // Reset ySpeed when it hits the ground
+            this.xSpeed *= 0.9
         }
 
-        this.posY += this.ySpeed; // Update y position
+        if (Math.abs(this.xSpeed) > 0.1) {
+            this.xSpeed *= 0.99
+        } else {
+            this.xSpeed = 0
+        }
+
+        if (this.posX > width - this.size || this.posX < 0) { // Check if not on the ground
+            this.xSpeed *= -1.51
+        }
+
+        this.posX += this.xSpeed;
+
 
         this.drawBall(this.posX, this.posY, this.size);
     }
@@ -36,12 +53,9 @@ class Ball {
     }
 
     throwBall() { // THIS SHIT NEED FIXING; MY NODDING (sig på dansk)
-        if (this.wasBallPressed() == true) {
-            this.x = random(0, width)
-            this.y = random(0, height)
-            this.isThrown = true;
-        } else {
-            this.isThrown = false;
-        }
+        this.xSpeed = random(-30,30)
+        this.ySpeed = random(-20,-10)
+        
+        console.log("THROWN!", this.xSpeed, " | ", this.ySpeed)
     }
 };
