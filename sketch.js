@@ -10,9 +10,6 @@ let foodImg;
 let firstSave = (window.localStorage.getItem(`timeSaved`) === null) ? Date.now() : window.localStorage.getItem(`timeSaved`);
 let ballImg;
 let ball
-
-
-
 let bestTime = (window.localStorage.getItem(`bestSaved`) === null) ? 0 : window.localStorage.getItem(`bestSaved`);
 let liveAnimals = [];
 
@@ -125,8 +122,7 @@ function removeAnimal(id) {
 
   liveAnimals.splice(liveAnimals.indexOf(id), 1)
   saveAnimals();
-  
-  console.log(liveAnimals)
+  saveTimePlayed()
 }
 
 function addAnimal() {
@@ -141,12 +137,19 @@ function addAnimal() {
     cats[cats.length - 1].eat()
   }
 
+  saveTimePlayed()
+  saveAnimals();
+}
+
+function saveTimePlayed() {
   window.localStorage.setItem(`timeSaved`, Date.now())
-  bestTime = (Date.now() - firstSave > bestTime) ? (Date.now() - firstSave) / 1000 : bestTime;
+
+  if ((Date.now() - parseInt(firstSave))/1000 > bestTime) {
+    bestTime = (Date.now() - firstSave) / 1000;
+  } 
+
   window.localStorage.setItem(`bestSaved`, bestTime)
   firstSave = Date.now();
-
-  saveAnimals();
 }
 
 function loadAnimals() {
