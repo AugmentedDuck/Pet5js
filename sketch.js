@@ -97,7 +97,6 @@ function mousePressed() {
   if(ball.wasBallPressed()){
     ball.throwBall()
   }
-  console.log(ball.wasBallPressed())
 }
 
 function wasFoodPressed(){
