@@ -35,7 +35,7 @@ class Ball {
         }
 
         if (this.posX > width - this.size || this.posX < 0) { // Check if not on the ground
-            this.xSpeed *= -1.501
+            this.xSpeed *= -1.01
         }
 
         if (Math.abs(this.xSpeed) < 0.1) { //checks if ball is standing
