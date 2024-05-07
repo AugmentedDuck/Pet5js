@@ -58,4 +58,8 @@ class Ball {
         
         console.log("THROWN!", this.xSpeed, " | ", this.ySpeed)
     }
+
+    getXCoord() {
+        return this.posX;
+    }
 };
