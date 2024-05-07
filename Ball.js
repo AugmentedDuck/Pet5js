@@ -34,7 +34,7 @@ class Ball {
         }
 
         if (this.posX > width - this.size || this.posX < 0) { // Check if not on the ground
-            this.xSpeed *= -1.51
+            this.xSpeed *= -1.501
         }
 
         this.posX += this.xSpeed;
