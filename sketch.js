@@ -20,7 +20,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   loadAnimals()
 
-  ball =new Ball(ballImg)
+  ball = new Ball(ballImg)
 
   dogX = width / 2
   catX = width / 3
@@ -36,6 +36,8 @@ function setup() {
 function draw() {
   image(backgroundImg, 0, 0, width, height);
   image(foodImg, width * 8.75 / 10, height / 10, min(width,height)/5, min(width,height)/5)
+
+  ball.update();
 
   text(`Seconds played: ${(Date.now() - firstSave)/1000}\nBest: ${bestTime}`,width/20, height/20);
 
