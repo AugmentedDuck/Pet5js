@@ -7,7 +7,7 @@ class Dog extends Pet {
         this.updateAffinity(1);
     }
 
-    walk() {
+    walkTo() {
 
     }
 
