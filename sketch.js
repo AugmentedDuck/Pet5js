@@ -43,6 +43,8 @@ function draw() {
 
   for (const dog of dogs) {
     dog.walkAround()
+    dog.walkTo(ball.getXCoord(), ball.getXCoordStandingStill())
+    
     if (time % 100 == 0) {
       if (dog.isPetDead()) {
         removeAnimal("D" + dog.id)

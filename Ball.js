@@ -7,6 +7,7 @@ class Ball {
         this.ySpeed = 0
         this.ballImg = ballImg;
         this.isThrown = false;
+        this.standingStill = true;
     }
 
     drawBall() {
@@ -37,6 +38,12 @@ class Ball {
             this.xSpeed *= -1.501
         }
 
+        if (Math.abs(this.xSpeed) < 0.1) { //checks if ball is standing
+            this.standingStill = true;
+        } else {
+            this.standingStill = false;
+        }
+
         this.posX += this.xSpeed;
 
 
@@ -52,14 +59,16 @@ class Ball {
         return false
     }
 
-    throwBall() { // THIS SHIT NEED FIXING; MY NODDING (sig på dansk)
+    throwBall() {
         this.xSpeed = random(-30,30)
         this.ySpeed = random(-20,-10)
-        
-        console.log("THROWN!", this.xSpeed, " | ", this.ySpeed)
     }
 
     getXCoord() {
         return this.posX;
+    }
+    
+    getXCoordStandingStill() {
+        return this.standingStill;
     }
 };
